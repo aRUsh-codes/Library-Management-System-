@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="font-size: 2.5rem; font-weight:bold; margin-bottom: 20px;">Issue Book</h2>
+
+<form method="POST" style="width: 50%; margin: 0 auto;">
+  {% csrf_token %}
+  
+  <!-- Book dropdown -->
+  <div style="margin-bottom: 20px;">
+    <label for="book" style="display: block; font-size: 1.2rem; font-weight:500; margin-bottom: 8px;">Book:</label>
+    <select name="book" id="book" required style="width: 100%; padding: 10px; font-size: 1rem; border-radius: 5px;">
+      <option value="">-- Select a book --</option>
+      {% for book in books %}
+        <option value="{{ book.id }}">{{ book.title }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  
+  <!-- Member dropdown -->
+  <div style="margin-bottom: 20px;">
+    <label for="member" style="display: block; font-size: 1.2rem; font-weight:500; margin-bottom: 8px;">Member:</label>
+    <select name="member" id="member" required style="width: 100%; padding: 10px; font-size: 1rem; border-radius: 5px;">
+      <option value="">-- Select a member --</option>
+      {% for member in members %}
+        <option value="{{ member.id }}">{{ member.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" style="width: 100%; padding: 12px; font-size: 1.2rem; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Issue Book</button>
+</form>
+
+<!-- Messages for errors or success -->
+{% if messages %}
+  <ul class="messages" style="margin-top: 20px; list-style-type: none; padding-left: 0;">
+    {% for message in messages %}
+      <li style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% endblock %}

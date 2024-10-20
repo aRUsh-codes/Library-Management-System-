@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="font-size: 32px;margin: 20px 20px; font-weight:bold;">Transaction Log</h1>
+    <a href="{% url 'issue_book' %}" 
+    class="btn btn-success" 
+    style="font-size: 18px; padding: 10px 20px; 
+    margin: 20px 20px; display: inline-block;">
+        Issue a Book
+    </a>
+<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+
+    <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+        <thead>
+            <tr>
+                <th data-priority="1" style="font-size:24px; font-weight:bold;">Book</th>
+                <th data-priority="2" style="font-size:24px; font-weight:bold;">Member</th>
+                <th data-priority="3" style="font-size:24px; font-weight:bold;">Issued Date</th>
+                <th data-priority="4" style="font-size:24px; font-weight:bold;">Return Date</th>
+                <th data-priority="5" style="font-size:24px; font-weight:bold;">Return Fee</th>
+                <th data-priority="6" style="font-size:24px; font-weight:bold;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.book.title }}</td>
+            <td>{{ transaction.member.name }}</td>
+            <td>{{ transaction.issued_date }}</td>
+            <td>{{ transaction.return_date|default:"Not returned yet" }}</td>
+            <td>{{ transaction.rent_fee }}</td>
+            <td>
+                {% if not transaction.return_date %}
+                <a href="{% url 'return_book' transaction.id %}" class="btn btn-warning">Return</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+{% endblock %}

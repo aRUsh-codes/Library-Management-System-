@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="font-size: 2.5rem; margin-bottom: 20px;">Add Member</h2>
+
+<form method="POST" style="width: 50%; margin: 0 auto;">
+    {% csrf_token %}
+    <div style="margin-bottom: 20px;">
+        {{ form.as_p }}
+    </div>
+
+    <!-- Button container -->
+    <div style="display: flex; justify-content: space-between; gap: 10px;">
+        <!-- Add Member Button -->
+        <button type="submit" class="btn btn-primary" style="flex-grow: 1; padding: 12px; font-size: 1.2rem; background-color: #007bff; border: none; border-radius: 5px;">
+            Add Member
+        </button>
+
+        <!-- Cancel Button -->
+        <a href="{% url 'member_list' %}" class="btn btn-secondary" style="flex-grow: 1; padding: 12px; font-size: 1.2rem; background-color: #6c757d; border: none; border-radius: 5px;">
+            Cancel
+        </a>
+    </div>
+</form>
+
+{% endblock %}

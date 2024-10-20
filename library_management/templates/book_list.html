@@ -1,0 +1,47 @@
+<!-- templates/book_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+<h1 style="font-size: 32px; margin: 20px 20px; font-weight:bold;">Book List</h1>
+
+<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+    <div class="table-responsive">
+
+    <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+        <thead>
+            <tr>
+                <th data-priority="1" style="font-size:24px; font-weight:bold;">Title</th>
+                <th data-priority="2" style="font-size:24px; font-weight:bold;">Authors</th>
+                <th data-priority="3" style="font-size:24px; font-weight:bold;">ISBN</th>
+                <th data-priority="4" style="font-size:24px; font-weight:bold;">Publisher</th>
+                <th data-priority="5" style="font-size:24px; font-weight:bold;">Pages</th>
+                <th data-priority="6" style="font-size:24px; font-weight:bold;">Stock</th>
+                <th data-priority="7" style="font-size:24px; font-weight:bold;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.authors }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>{{ book.publisher }}</td>
+            <td>{{ book.num_pages }}</td>
+            <td>{{ book.stock }}</td>
+            <td>
+                <a href="{% url 'update_book' book.isbn %}" class="btn btn-primary" style="margin: 10px;">Edit</a>
+                <a href="{% url 'delete_book' book.isbn %}" class="btn btn-danger" 
+                   onclick="return confirm('Are you sure you want to delete this book?');">
+                   Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+    </div>
+</div>
+{% endblock %}

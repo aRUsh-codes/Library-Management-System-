@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="font-size: 32px; margin: 20px 20px; font-weight:bold;">Members</h1>
+<a href="{% url 'add_member' %}" class="btn btn-success" style="font-size: 18px; padding: 10px 20px; margin:20px 20px; display: inline-block;">Add Member</a>
+<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+
+    <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+        <thead>
+            <tr>
+                <th data-priority="1" style="font-size:24px; font-weight:bold;">Name</th>
+                <th data-priority="2" style="font-size:24px; font-weight:bold;">Email</th>
+                <th data-priority="3" style="font-size:24px; font-weight:bold;">Debt</th>
+                <th data-priority="4" style="font-size:24px; font-weight:bold;">Actions</th>
+                <th data-priority="5" style="font-size:24px; font-weight:bold;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+                <td>{{ member.name }}</td>
+                <td>{{ member.email }}</td>
+                <td>Rs. {{ member.debt }}</td>
+                <td>
+                    <a href="{% url 'update_member' member.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'delete_member' member.id %}" class="btn btn-danger" 
+                    onclick="return confirm('Are you sure you want to delete this member?');">Delete</a>
+                </td>
+                <td>
+                    {% if member.debt < 500 %}
+                    <h3 class="btn btn-success">Allowed to issue</h3>
+                    {% else %}
+                    <h3 class="btn btn-secondary">Not allowed to issue</h3>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor%}
+        </tbody>
+
+    </table>
+
+</div>
+{% endblock %}
