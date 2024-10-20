@@ -32,3 +32,6 @@ https://github.com/user-attachments/assets/eee22b9b-cec9-4178-b5a0-f1662a97d375
 ![Screenshot (195)](https://github.com/user-attachments/assets/a0d11c7e-2db2-482c-bdd4-a87c43f0aff0)
 
 ![Screenshot (196)](https://github.com/user-attachments/assets/bbfab65f-b5b5-4be7-adc7-7c50e2088278)
+
+
+(This project is made for a task submission to frappe.io)
